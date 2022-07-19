@@ -8,3 +8,9 @@ body {
   margin: 0;
   font-family: "Raleway", sans-serif;
 }
+
+#root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
