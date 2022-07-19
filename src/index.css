@@ -4,6 +4,10 @@
   --blue: #2589cc;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   font-family: "Raleway", sans-serif;
@@ -13,4 +17,5 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 6px;
 }
