@@ -1,0 +1,34 @@
+.footer__textarea-plate {
+  border-top: 1px solid var(--gray-dark);
+  padding: 25px 30px 20px 30px;
+  background-color: var(--gray-light);
+}
+
+.footer__textarea {
+  resize: vertical;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  min-height: 79px;
+  border: 1px solid #cccccc;
+  border-radius: 5px;
+  padding: 11px 11px;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  line-height: 1.15em;
+}
+
+.footer__button-plate {
+  border-top: 1px solid var(--gray-dark);
+  padding: 24px 30px 24px 30px;
+  background-color: var(--gray-light);
+}
+
+.footer__button {
+  border: none;
+  border-radius: 7px;
+  width: 100%;
+  padding: 15px 11px;
+  background-color: var(--blue);
+  font-size: 25px;
+  color: #fff;
+}
