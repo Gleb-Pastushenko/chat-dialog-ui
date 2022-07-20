@@ -10,11 +10,20 @@ export const Footer = () => {
     setText(e.currentTarget.value);
   };
 
+  const sendMessageByPressingEnter = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      sendMessage();
+    }
+  };
+
   const sendMessage = () => {
-    dispatch({
-      type: "SEND_MESSAGE",
-      payload: { text: text, isCurrentUser: true },
-    });
+    if (text.trim() !== "") {
+      dispatch({
+        type: "SEND_MESSAGE",
+        payload: { text: text, isCurrentUser: true },
+      });
+    }
     setText("");
   };
 
@@ -24,7 +33,8 @@ export const Footer = () => {
         <textarea
           className="footer__textarea"
           value={text}
-          onChange={(e) => handleTextChange(e)}
+          onChange={handleTextChange}
+          onKeyDown={sendMessageByPressingEnter}
         ></textarea>
       </div>
       <div className="footer__button-plate">
