@@ -1,7 +1,6 @@
 .header {
   padding: 30px 29px;
-  background: url("https://picsum.photos/320/200?random=1&blur=2") center /
-    cover;
+  background: url("https://picsum.photos/id/201/480/116?blur=2") center / cover;
 }
 
 .header__title {
