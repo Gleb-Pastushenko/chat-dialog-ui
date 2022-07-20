@@ -15,6 +15,7 @@ export const Footer = () => {
       type: "SEND_MESSAGE",
       payload: { text: text, isCurrentUser: true },
     });
+    setText("");
   };
 
   return (
@@ -22,6 +23,7 @@ export const Footer = () => {
       <div className="footer__textarea-plate">
         <textarea
           className="footer__textarea"
+          value={text}
           onChange={(e) => handleTextChange(e)}
         ></textarea>
       </div>
