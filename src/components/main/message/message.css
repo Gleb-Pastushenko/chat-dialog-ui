@@ -23,7 +23,8 @@
 }
 
 .message__text-bubble {
-  margin: 0 15px;
+  width: 100%;
+  margin: 0 15px 0 15px;
   padding: 11px 12px;
   border-radius: 12px;
   background-color: #fff;
