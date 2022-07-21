@@ -1,7 +1,6 @@
 import React from "react";
 import "./main.css";
-import { useDispatch, useSelector } from "react-redux/es/exports";
-import { INITIAL_MESSAGES } from "../../constants";
+import { useSelector } from "react-redux/es/exports";
 import { Message } from "./message/message";
 
 export const Main = () => {

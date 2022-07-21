@@ -1,8 +1,9 @@
 import { createStore } from "redux";
-import { INITIAL_MESSAGES } from "./constants";
+import { INITIAL_MESSAGES, MESSAGES_FOR_REPLY } from "./constants";
 
 const defaultState = {
   messages: INITIAL_MESSAGES,
+  messagesForReply: MESSAGES_FOR_REPLY,
 };
 
 const reducer = (state = defaultState, action) => {
