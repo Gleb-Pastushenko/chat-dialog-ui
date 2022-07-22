@@ -3,8 +3,8 @@ import "./login.css";
 
 export const Login = () => {
   return (
-    <div className="login">
+    <main className="login">
       <button className="login__button">Login with Google account</button>
-    </div>
+    </main>
   );
 };
