@@ -1,4 +1,4 @@
-import { MESSAGES_FOR_REPLY } from "../../../constants";
+import { MESSAGES_FOR_REPLY } from "../../../../constants";
 
 export const getRandomMessage = () => {
   const index = Math.floor(Math.random() * MESSAGES_FOR_REPLY.length);
