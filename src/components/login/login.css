@@ -1,7 +1,9 @@
 .login {
-  padding: 100px 10px;
   display: flex;
+  height: calc(100vh - 128px);
+  padding: 100px 10px;
   justify-content: center;
+  align-items: center;
 }
 
 .login__button {
