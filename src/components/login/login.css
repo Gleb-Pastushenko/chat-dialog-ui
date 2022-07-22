@@ -1,9 +1,10 @@
 .login {
   display: flex;
-  height: calc(100vh - 128px);
-  padding: 100px 10px;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  row-gap: 60px;
+  height: calc(100vh - 128px);
+  padding: 10px;
 }
 
 .login__button {
