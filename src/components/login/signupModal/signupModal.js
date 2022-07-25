@@ -19,7 +19,7 @@ const style = {
   p: 4,
 };
 
-export default function SignupModal({ open, setOpen }) {
+export default function SignupModal({ open, setOpen, submitFunc }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [pwdVisible, setPwdVisible] = React.useState(false);
@@ -47,6 +47,7 @@ export default function SignupModal({ open, setOpen }) {
   };
 
   const handleSubmitClick = (e) => {
+    submitFunc(email, password);
     handleClose();
   };
 

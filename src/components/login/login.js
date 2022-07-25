@@ -1,27 +1,62 @@
 import React from "react";
 import "./login.css";
-import { GoogleAuthProvider } from "firebase/auth";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SignupModal from "./signupModal/signupModal";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
 
 export const Login = () => {
   const [open, setOpen] = React.useState(false);
-  const [submitFunc, setSubmitFunc] = React.useState(null);
+  const [submitFunc, setSubmitFunc] = React.useState(undefined);
   const auth = useSelector((state) => state.firebaseAuth);
-  const provider = new GoogleAuthProvider();
+  const dispatch = useDispatch();
 
-  const login = () => {};
+  const login = (email, password) => {
+    console.log("LogIn");
+    console.log(`email: ${email}`);
+    console.log(`password: ${password}`);
+    console.log(`auth: ${auth}`);
 
-  const signup = () => {};
+    signInWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        dispatch({ type: "LOGIN" });
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const signup = (email, password) => {
+    console.log("SignUp");
+    console.log(`email: ${email}`);
+    console.log(`password: ${password}`);
+    console.log(`auth: ${auth}`);
+
+    createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+  };
 
   const handleLoginButtonClick = () => {
+    setSubmitFunc(() => login);
     setOpen(true);
-    setSubmitFunc(login);
   };
 
   const handleSignupButtonClick = () => {
+    setSubmitFunc(() => signup);
     setOpen(true);
-    setSubmitFunc(signup);
   };
 
   return (
