@@ -1,4 +1,6 @@
 .header {
+  display: flex;
+  justify-content: space-between;
   padding: 30px 29px;
   background: url("https://picsum.photos/id/201/480/116?blur=2") center / cover;
 }
@@ -8,4 +10,8 @@
   font-size: 48px;
   color: white;
   text-shadow: 3px 3px #000;
+}
+
+.header__logout-button {
+  color: white;
 }
