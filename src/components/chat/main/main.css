@@ -2,3 +2,7 @@
   max-height: 432px;
   overflow-y: auto;
 }
+
+.main::-webkit-scrollbar {
+  display: none;
+}
