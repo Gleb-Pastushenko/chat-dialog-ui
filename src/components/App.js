@@ -1,13 +1,14 @@
 import React from "react";
-import "./app.css";
-import { Header } from "./header/header";
 import { Routes, Route } from "react-router-dom";
-import { PUBLIC_ROUTES, PRIVATE_ROUTES } from "../routes";
 import { useSelector } from "react-redux";
+import { Header } from "./header/header";
+import { PUBLIC_ROUTES, PRIVATE_ROUTES } from "../routes";
+import "./app.css";
 
 export const App = () => {
-  const LOGGED = useSelector((state) => state.isLogged);
-  const routes = LOGGED ? PRIVATE_ROUTES : PUBLIC_ROUTES;
+  const isLogged = useSelector((state) => state.isLogged);
+  const routes = isLogged ? PRIVATE_ROUTES : PUBLIC_ROUTES;
+
   return (
     <div className="app">
       <Header />

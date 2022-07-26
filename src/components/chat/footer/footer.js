@@ -1,33 +1,30 @@
 import React from "react";
-import "./footer.css";
+import { useState, useRef } from "react";
 import { useDispatch } from "react-redux/es/hooks/useDispatch";
-import { getRandomMessage } from "./utils/getRandomMessage";
+import { useSelector } from "react-redux";
+import { addDoc, collection } from "firebase/firestore";
+import { serverTimestamp } from "firebase/firestore";
+
+import "./footer.css";
 
 export const Footer = () => {
-  const [messageText, setMessageText] = React.useState("");
-  const messageTextRef = React.useRef();
+  const [messageText, setMessageText] = useState("");
+  const messageTextRef = useRef();
+  const { db, user } = useSelector((state) => state);
+  const colRef = collection(db, "messages");
   const dispatch = useDispatch();
 
-  const sendMessage = (e) => {
-    const msgText = messageText.trim();
-    if (msgText !== "") {
-      dispatch({
-        type: "SEND_MESSAGE",
-        payload: { text: msgText, isCurrentUser: true },
+  const sendMessage = () => {
+    const messageTextTrimmed = messageText.trim();
+    if (messageTextTrimmed !== "") {
+      addDoc(colRef, {
+        text: messageTextTrimmed,
+        uid: user.uid,
+        createdAt: serverTimestamp(),
+      }).then(() => {
+        setMessageText("");
       });
-      setMessageText("");
-      getReply();
     }
-  };
-
-  const getReply = () => {
-    const { msgText, delay } = getRandomMessage();
-    setTimeout(() => {
-      dispatch({
-        type: "SEND_MESSAGE",
-        payload: { text: msgText, isCurrentUser: false },
-      });
-    }, delay);
   };
 
   const handleTextareaOnChange = (e) => {

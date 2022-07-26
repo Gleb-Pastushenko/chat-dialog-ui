@@ -1,11 +1,10 @@
 // App imports
 import { createStore } from "redux";
-import { INITIAL_MESSAGES, MESSAGES_FOR_REPLY } from "./constants";
 
 // Firebase imports
 import { initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQ7lBdBI8py75MJW3PAVrXuixIPFc8w20",
@@ -18,15 +17,24 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+
+const pause = async () => {
+  return await new Promise((resolve, reject) => {
+    setTimeout(() => {}, 1000);
+  });
+};
+
+pause();
+
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 const defaultState = {
-  messages: INITIAL_MESSAGES,
-  messagesForReply: MESSAGES_FOR_REPLY,
-  firebaseAuth: auth,
-  firebaseDB: db,
-  isLogged: false,
+  auth: auth,
+  db: db,
+  isLogged: auth.user ? true : false,
+  user: undefined,
+  disableListener: undefined,
 };
 
 const reducer = (state = defaultState, action) => {
@@ -42,11 +50,19 @@ const reducer = (state = defaultState, action) => {
           },
         ],
       };
-    case "LOGIN":
+    case "LOGIN": {
       return { ...state, isLogged: true };
+    }
 
     case "LOGOUT":
       return { ...state, isLogged: false };
+
+    case "GET_USER":
+      return { ...state, user: action.payload };
+
+    case "SET_DISABLE_LISTENER": {
+      return { ...state, disableListener: action.payload };
+    }
 
     default:
       return state;

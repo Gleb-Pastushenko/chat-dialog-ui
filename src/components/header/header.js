@@ -1,17 +1,18 @@
-import { IconButton } from "@mui/material";
 import React from "react";
-import "./header.css";
-import LogoutIcon from "@mui/icons-material/Logout";
 import { useSelector, useDispatch } from "react-redux";
+import { IconButton } from "@mui/material";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { signOut } from "firebase/auth";
 
+import "./header.css";
+
 export const Header = () => {
-  const { isLogged, firebaseAuth: auth } = useSelector((state) => state);
-  console.log(`auth: ${auth}`);
+  const { isLogged, auth, disableListener } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const handleLogoutClick = () => {
     console.log("handleLogoutClick");
+    disableListener();
     signOut(auth)
       .then(() => {
         dispatch({ type: "LOGOUT" });
