@@ -19,7 +19,7 @@ const style = {
   p: 4,
 };
 
-export default function SignupModal({ open, setOpen, submitFunc }) {
+export const SignupModal = ({ open, setOpen, submitFunc }) => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [pwdVisible, setPwdVisible] = React.useState(false);
@@ -60,8 +60,8 @@ export default function SignupModal({ open, setOpen, submitFunc }) {
       <Modal
         open={open}
         onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
+        aria-labelledby="modal-login-signup"
+        aria-describedby="modal-login-signup"
       >
         <Box sx={style}>
           <Stack spacing={3}>
@@ -113,4 +113,4 @@ export default function SignupModal({ open, setOpen, submitFunc }) {
       </Modal>
     </div>
   );
-}
+};
