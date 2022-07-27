@@ -4,16 +4,9 @@ import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from "firebase/auth";
-import {
-  browserLocalPersistence,
-  browserSessionPersistence,
-  inMemoryPersistence,
-} from "firebase/auth";
-import { setPersistence } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { SignupModal } from "./signupModal/signupModal";
 import { ErrorModal } from "./errorModal/errorModal";
-
 import "./login.css";
 
 export const Login = () => {
@@ -21,24 +14,16 @@ export const Login = () => {
   const [openErrorModal, setOpenErrorModal] = useState(false);
   const [submitFunc, setSubmitFunc] = useState(undefined);
   const [errorCode, setErrorCode] = useState("");
-  const auth = useSelector((state) => state.auth);
+  const { auth } = useSelector((state) => state);
   const dispatch = useDispatch();
 
   const login = (email, password) => {
-    setPersistence(auth, browserSessionPersistence).then(() => {
-      signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-          const user = userCredential.user;
-          dispatch({ type: "LOGIN" });
-          dispatch({ type: "GET_USER", payload: user });
-        })
-        .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorCode(errorCode);
-          setOpenErrorModal(true);
-        });
-    });
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {})
+      .catch((error) => {
+        setErrorCode(error.code);
+        setOpenErrorModal(true);
+      });
   };
 
   const signup = (email, password) => {
@@ -49,8 +34,8 @@ export const Login = () => {
         dispatch({ type: "GET_USER", payload: user });
       })
       .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        setErrorCode(error.code);
+        setOpenErrorModal(true);
       });
   };
 

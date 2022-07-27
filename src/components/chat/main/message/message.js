@@ -1,6 +1,6 @@
 import React from "react";
-import "./message.css";
 import { CURRENT_USER_AVATAR_URL, OTHER_USER_AVATAR_URL } from "./constants";
+import "./message.css";
 
 export const Message = ({ text, isCurrentUser }) => {
   return (

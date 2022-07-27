@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useRef } from "react";
-import { useDispatch } from "react-redux/es/hooks/useDispatch";
 import { useSelector } from "react-redux";
 import { addDoc, collection } from "firebase/firestore";
 import { serverTimestamp } from "firebase/firestore";
@@ -12,7 +11,6 @@ export const Footer = () => {
   const messageTextRef = useRef();
   const { db, user } = useSelector((state) => state);
   const colRef = collection(db, "messages");
-  const dispatch = useDispatch();
 
   const sendMessage = () => {
     const messageTextTrimmed = messageText.trim();

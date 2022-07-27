@@ -19,14 +19,17 @@ export const ErrorModal = ({ errorCode, open, setOpen }) => {
   let errorMessage;
 
   switch (errorCode) {
-    case "auth/wrong-password": {
+    case "auth/wrong-password":
       errorMessage = "Wrong password!";
       break;
-    }
-    case "auth/user-not-found": {
+
+    case "auth/user-not-found":
       errorMessage = "User with such e-mail is not registered!";
       break;
-    }
+
+    case "auth/email-already-in-use":
+      errorMessage = "User with such e-mail already exists!";
+      break;
   }
 
   return (

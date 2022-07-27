@@ -1,7 +1,4 @@
-// App imports
 import { createStore } from "redux";
-
-// Firebase imports
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
@@ -17,24 +14,16 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-const pause = async () => {
-  return await new Promise((resolve, reject) => {
-    setTimeout(() => {}, 1000);
-  });
-};
-
-pause();
-
 const auth = getAuth(app);
 const db = getFirestore(app);
 
 const defaultState = {
   auth: auth,
   db: db,
-  isLogged: auth.user ? true : false,
+  isLogged: false,
   user: undefined,
   disableListener: undefined,
+  disableListenerAuth: undefined,
 };
 
 const reducer = (state = defaultState, action) => {
@@ -50,9 +39,9 @@ const reducer = (state = defaultState, action) => {
           },
         ],
       };
-    case "LOGIN": {
+
+    case "LOGIN":
       return { ...state, isLogged: true };
-    }
 
     case "LOGOUT":
       return { ...state, isLogged: false };
@@ -60,9 +49,11 @@ const reducer = (state = defaultState, action) => {
     case "GET_USER":
       return { ...state, user: action.payload };
 
-    case "SET_DISABLE_LISTENER": {
+    case "SET_DISABLE_LISTENER":
       return { ...state, disableListener: action.payload };
-    }
+
+    case "SET_DISABLE_LISTENER_AUTH":
+      return { ...state, disableListenerAuth: action.payload };
 
     default:
       return state;

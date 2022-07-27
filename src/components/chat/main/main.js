@@ -3,17 +3,20 @@ import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Message } from "./message/message";
-
 import "./main.css";
 
 export const Main = () => {
   const dispatch = useDispatch();
   const [messages, setMessages] = useState([]);
-  const mainRef = useRef(null);
-
+  const mainRef = useRef();
   const { db, user } = useSelector((state) => state);
+
   const colRef = collection(db, "messages");
   const q = query(colRef, orderBy("createdAt", "asc"));
+
+  useEffect(() => {
+    mainRef.current.scrollTop = mainRef.current.scrollHeight;
+  }, [messages]);
 
   useEffect(() => {
     const disableListener = onSnapshot(q, (snapshot) => {
@@ -26,7 +29,6 @@ export const Main = () => {
         });
         setMessages(messages);
       });
-      mainRef.current.scrollTop = mainRef.current.scrollHeight;
     });
 
     dispatch({ type: "SET_DISABLE_LISTENER", payload: disableListener });
@@ -34,8 +36,8 @@ export const Main = () => {
 
   return (
     <main className="main" ref={mainRef}>
-      {messages.map(({ text, isCurrentUser }, index) => (
-        <Message key={index} text={text} isCurrentUser={isCurrentUser} />
+      {messages.map(({ text, isCurrentUser, id }) => (
+        <Message key={id} text={text} isCurrentUser={isCurrentUser} />
       ))}
     </main>
   );
