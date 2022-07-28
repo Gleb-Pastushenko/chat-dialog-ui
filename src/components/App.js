@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux/es/exports";
 import { PUBLIC_ROUTES, PRIVATE_ROUTES } from "../routes";
 import "./app.css";
 
-export const App = () => {
+export default function App() {
   const dispatch = useDispatch();
   const { auth, isLogged } = useSelector((state) => state);
   const routes = isLogged ? PRIVATE_ROUTES : PUBLIC_ROUTES;
@@ -33,4 +33,4 @@ export const App = () => {
       </Routes>
     </div>
   );
-};
+}
